@@ -9,14 +9,14 @@ export default function Card(city) {
     const { name, subtitle, score, description, image } = city;
 
     return (
-        <div class="container-fluid">
+        <div className="container-fluid">
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-6">
                         <CarouselCity />
                     </div>
-                    <div class="col-md-6">
+                    <div className="col-md-6">
 
                         <h2>{name}</h2>
 
@@ -25,11 +25,11 @@ export default function Card(city) {
                         <ul className={styles.scorecity}>
                             Score= {score}
                             {/*                                  
-                                    <li><i class="bi bi-star-fill" Style="color:#C49D48" ></i></li>
-                                    <li><i class="bi bi-star-fill"Style="color:#C49D48"></i></li>
-                                    <li><i class="bi bi-star-fill"Style="color:#C49D48"></i></li>
-                                    <li><i class="bi bi-star-fill"Style="color:#C49D48"></i></li>
-                                    <li><i class="bi bi-star"></i></li>   
+                                    <li><i className="bi bi-star-fill" Style="color:#C49D48" ></i></li>
+                                    <li><i className="bi bi-star-fill"Style="color:#C49D48"></i></li>
+                                    <li><i className="bi bi-star-fill"Style="color:#C49D48"></i></li>
+                                    <li><i className="bi bi-star-fill"Style="color:#C49D48"></i></li>
+                                    <li><i className="bi bi-star"></i></li>   
                              */}
 
 
@@ -37,7 +37,7 @@ export default function Card(city) {
                         <p> {description}</p>
                         <Link to='/packages'>
                             <div className={styles.citybuttons}>
-                                <button type="button" class="btn btn-outline-secondary btn-lg">View all Packages</button>
+                                <button type="button" className="btn btn-outline-secondary btn-lg">View all Packages</button>
                             </div>
                         </Link>
                     </div>

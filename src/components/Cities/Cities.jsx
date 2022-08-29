@@ -23,7 +23,7 @@ export default function Card() {
     <Fragment>
       <NavBar />
       <SearchBar />
-      <div class="container-fluid">
+      <div className="container-fluid">
 
 
         <br />
@@ -38,19 +38,19 @@ export default function Card() {
               ) : (
                 <div className="eachCity" key={prevId++}>
 
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
-                          <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-heading">
-                              <button class="accordion-button collapsed" className={styles.city01} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-md-12">
+                        <div className="accordion accordion-flush" id="accordionFlushExample">
+                          <div className="accordion-item">
+                            <h2 className="accordion-header" id="flush-heading">
+                              <button className="accordion-button collapsed" className ={styles.city01} type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                 {e.name}
 
                               </button>
                             </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                              <div class="accordion-body">
+                            <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                              <div className="accordion-body">
                                 <City
                                   subtitle={e.subTitle}
                                   score={e.score}

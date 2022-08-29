@@ -40,12 +40,12 @@ export default function Search() {
 
             <div className={styles.container}>
                 <form className={styles.searchbarstyle} onSubmit={(e) => handleSubmit(e)}>
-                    <div class="col-md-2">
-                        <label class="visually-hidden" for="specificSizeInputName">Name</label>
-                        <input type="text" value={name} class="form-control input-lg" id="specificSizeInputName" placeholder="Example: Córdoba" onChange={(e)=>handleName(e)} />
+                    <div className="col-md-2">
+                        <label className="visually-hidden" for="specificSizeInputName">Name</label>
+                        <input type="text" value={name} className="form-control input-lg" id="specificSizeInputName" placeholder="Example: Córdoba" onChange={(e)=>handleName(e)} />
                     </div>
-                    <div class="col-md-auto">
-                        <button type="submit" class="btn btn-outline-secondary btn-lg">Search</button>
+                    <div className="col-md-auto">
+                        <button type="submit" className="btn btn-outline-secondary btn-lg">Search</button>
                     </div>
                 </form>
             </div>
