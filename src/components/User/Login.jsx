@@ -4,6 +4,8 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useState } from "react";
+import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 // import { useDispatch, useSelector } from "react-redux";
 
 export default function Login() {
@@ -20,6 +22,13 @@ export default function Login() {
         setValidated(true);
     };
 
+    const responseGoogle = (response) => {
+		console.log(response);
+	}
+
+	const responseFacebook = (response) => {
+		console.log(response);
+	}
 
     return (
         <div className="container">
@@ -92,6 +101,25 @@ export default function Login() {
 
                                     </Form>
                                     {/* Fin Form */}
+                                    <div className="row">
+                <div className="col-md-12">
+                <GoogleLogin
+				clientId="968326545929-buhpvbglrgfe23rqfhmhmo2a9t738bev.apps.googleusercontent.com"
+				buttonText="Login"
+				onSuccess={responseGoogle}
+				onFailure={responseGoogle}
+				cookiePolicy={'single_host_origin'}
+				/>
+				 <FacebookLogin
+				appId="1720158145028291"
+				autoLoad={false}
+				fields="name,email,picture"
+				//onClick={componentClicked}
+				callback={responseFacebook} 
+				/>
+                </div>
+            </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -99,6 +127,7 @@ export default function Login() {
                     {/* Fin modal */}
                 </div>
             </div>
+            
         </div>
     )
 }
