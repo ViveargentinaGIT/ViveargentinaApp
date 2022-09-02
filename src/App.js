@@ -9,17 +9,19 @@ import Experiences from './components/Experiences/Experiences.jsx';
 import FilterCities from './components/Filters/FilterCities.jsx';
 import ContactUs from './components/ContactUs/ContactUs'
 import Error404 from './components/Error404/Error404'
+import MenuUser from './components/User/MenuUser';
 
 
 
     function App() {
       return (
         <BrowserRouter>
-        <div className="App">    
+        <div className="App">   
           <Switch>
 
             <Route exact path="/" component={LandingPage}/>
-            <Route path="/contact_us"  component={ContactUs}/> 
+            <Route path="/contact_us"  component={ContactUs}/>
+            <Route path="/user"  component={MenuUser}/> 
             <Route exact path="/cities"  component={Cities}/>
             <Route exact path="/city"  component={City}/>
             <Route exact path="/home"  component={HomePage}/>
