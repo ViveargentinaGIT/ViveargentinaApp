@@ -27,28 +27,80 @@ export default function Card(props) {
   const [item, setItem] = useState({
     name: "",
     price: 0,
-    pax: 0,
+    pax: 1,
     dates: "",
     image: "",
   });
 
-  const handleChange = async (e, name, price, image) => {
-    console.log("Entrando a HC");
+  const handleChange = (e, name, price, image) => {
     setItem({
       ...item,
       [e.target.name]: e.target.value,
-      name: name,
-      image: image,
-      price: price,
+      name,
+      price,
+      image
     });
   };
 
-  const handleClick = (event) => {
+  const handleClickPreCart = (name, price, image) => {
+    setItem({
+      ...item,
+      name: name,
+      image: image,
+      price: price,
+    })
+  }
+
+  const handleClick = () => {
+    if (document.getElementById(`${item.name} passengers`).value <= 0) {
+      return Swal.fire({
+        title: "You must add at least one passenger",
+        text: item.name,
+        imageUrl: item.image,
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+      });
+    }
+    if (document.getElementById(`${item.name} dates`).value === 'select') {
+      return Swal.fire({
+        title: "You must select a date to continue",
+        text: item.name,
+        imageUrl: item.image,
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+      });
+    }
+
     let arrayItemsStore = JSON.parse(localStorage.getItem("items"));
+    // console.log(document.getElementById('dates').value)
     if (arrayItemsStore === null) arrayItemsStore = [];
+    if (arrayItemsStore.find(e => e.name === item.name && e.dates === item.dates)) {
+      document.getElementById(`${item.name} dates`).value = 'select'
+      return Swal.fire({
+        title: "You already have this item in your cart",
+        text: item.name,
+        imageUrl: item.image,
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+      });
+      
+    }
+    if (!arrayItemsStore.find(e => e.name === item.name && e.dates === item.dates)) {
     arrayItemsStore.push(item);
     localStorage.setItem("items", JSON.stringify(arrayItemsStore));
-    Swal.fire({
+    // Alert
+    document.getElementById(`${item.name} dates`).value = 'select'
+    setItem({
+      name: "",
+      price: 0,
+      pax: 1,
+      dates: "",
+      image: "",
+    });
+    return Swal.fire({
       title: "Added to cart successfully!",
       text: item.name,
       imageUrl: item.image,
@@ -56,14 +108,8 @@ export default function Card(props) {
       imageHeight: 200,
       imageAlt: "Custom image",
     });
-    setItem({
-      name: "",
-      price: 0,
-      pax: 0,
-      dates: "",
-      image: "",
-    });
-  };
+  }
+};
 
   //   Fin Precart
 
@@ -101,11 +147,11 @@ export default function Card(props) {
                 <div className="row">
                   <div className="col-md-6">
                     <div>
-                      <h2 style={{ textTransform: "uppercase", fontWeight: "600", fontSize: "1.2vw" }} className={styles.titlepackages}>{e.name}</h2>
-                      <h4 style={{ textTransform: "uppercase", fontWeight: "700", fontFamily: "Roboto",fontSize: "0.8vw" }}>{e.subTitle}</h4>
-                      Score: {e.score}
+                      <h2 style={{ textTransform: "uppercase", fontWeight: "600", fontSize: "24px" }} className={styles.titlepackages}>{e.name}</h2>
+                      <h4 style={{ textTransform: "uppercase", fontWeight: "700", fontFamily: "Roboto",fontSize: "18px" }}>{e.subTitle}</h4>
+                      <h4 style={{ color:"#C49D48",fontWeight: "700", fontFamily: "Roboto",fontSize: "18px" }}>Score: {e.score}</h4>
 
-                      <p style={{ fontFamily: "Roboto", fontSize: "1.2vw", fontWeight: "300", textAlign: "justify", marginRight: "5vh" }}>{e.description}</p>
+                      <p style={{ fontFamily: "Roboto", fontSize: "18px", fontWeight: "300", textAlign: "justify", marginRight: "5vh" }}>{e.description}</p>
                     </div>
 
                     <div className={`row ${styles.pricelist}`}>
@@ -148,6 +194,7 @@ export default function Card(props) {
                           {/* Boton Modal */}
                           <button
                             type="button"
+                            onClick={() => handleClickPreCart(e.name, e.price, e.image)}
                             className="btn btn-outline-secondary btn-lg"
                             data-bs-toggle="modal"
                             data-bs-target={`#${e.name.split(" ").join("")}`}
@@ -180,8 +227,8 @@ export default function Card(props) {
                                   <i
                                     class="bi bi-heart-fill"
                                     style={{
-                                      fontSize: "4vh",
-                                      paddingTop: "3vh",
+                                      fontSize: "20px",
+                                      paddingTop: "2vh",
                                     }}
                                   ></i>
                                 </div>
@@ -192,14 +239,14 @@ export default function Card(props) {
                                     style={{
                                       color: "#C49D48",
                                       textTransform: "uppercase",
-                                      textTransform: "uppercase", fontWeight: "600", fontSize: "1.2vw"
+                                      textTransform: "uppercase", fontWeight: "600", fontSize: "20px"
                                     }}
                                   >
                                     {e.name}
                                   </h2>
-                                  <h4 style={{ fontSize: "0.8vw",textTransform: "uppercase", fontWeight: "700" }}>{e.subTitle}</h4>
+                                  <h4 style={{ fontSize: "14px",textTransform: "uppercase", fontWeight: "700" }}>{e.subTitle}</h4>
                                 </div>
-                                <p className={styles.modaldescription} style={{ fontFamily: "Roboto", fontSize: "1.1vw", fontWeight: "300" }}>
+                                <p className={styles.modaldescription} style={{ fontFamily: "Roboto", fontSize: "14px", fontWeight: "300" }}>
                                   {e.description}
                                 </p>
                                 <div class="mt-5 mb-5">
@@ -227,7 +274,7 @@ export default function Card(props) {
                                         fontWeight: "200",
                                         fontFamily: "Roboto",
                                       }} className="text-end">
-                                        Please, choose the number of passengers:
+                                        Please, select the number of passengers:
                                       </p>
                                     </div>
                                     <div className="col-md-4 text-start">
@@ -235,7 +282,7 @@ export default function Card(props) {
                                         className={styles.cantpackages}
                                         name="pax"
                                         min="1"
-                                        id="pax"
+                                        id={`${item.name} passengers`}
                                         type="number"
                                         value={item.pax}
                                         defaultValue="1"
@@ -245,7 +292,6 @@ export default function Card(props) {
                                             e.name,
                                             e.price,
                                             e.image,
-                                            e.dates
                                           )
                                         }
                                         style={{
@@ -264,7 +310,7 @@ export default function Card(props) {
                                         fontFamily: "Roboto",
                                       }}
                                         className="text-end">
-                                        Please, choose date:
+                                        Please, select a date:
                                       </p>
                                     </div>
                                     <div className="col-md-4 text-start">
@@ -275,24 +321,22 @@ export default function Card(props) {
                                             e.name,
                                             e.price,
                                             e.image,
-                                            e.dates
                                           )
                                         }
                                         name="dates"
-                                        id="dates"
+                                        id={`${e.name} dates`}
+
                                         style={{
                                           color: "black",
                                           fontWeight: "500",
                                           fontFamily: "Roboto",
                                         }}
                                       >
-                                        <option disabled selected>
-                                          Choose
+                                        <option value="select" disabled selected>
+                                          Select
                                         </option>
-                                        {e.dates.split(",").map((e) => {
-                                          return (
-                                            <option value={e}>{e} </option>
-                                          );
+                                        {e.dates?.split(",").map((e) => {
+                                          return <option value={e}>{e} </option>;
                                         })}
                                       </select>
                                     </div>
@@ -305,11 +349,12 @@ export default function Card(props) {
                                           color: "black",
                                           fontWeight: "800",
                                           fontFamily: "Roboto",
+                                          fontSize:"20px"
                                         }}
                                       >
                                         TOTAL:{" "}
                                         <i className="bi bi-currency-dollar"></i>
-                                        ARS {e.price * item.pax}
+                                        ARS {e.price * item.pax < 0 ? 0 : e.price * item.pax}
                                       </div>
                                     </div>
                                   </div>
@@ -326,8 +371,8 @@ export default function Card(props) {
                                   Cancel
                                 </button>
                                 <button
-                                  onClick={(event) => {
-                                    handleClick(event);
+                                  onClick={() => {
+                                    handleClick();
                                   }}
                                   type="button"
                                   className="btn btn-primary"

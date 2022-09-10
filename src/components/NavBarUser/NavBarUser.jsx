@@ -70,9 +70,9 @@ function NavBarUser() {
               <ul class="dropdown-menu">
 
                 <li>
-                    <a class="dropdown-item" href="/profile" style={{ color: "#c49d48e3", fontSize: "1rem" }}>MY PROFILE</a>
+                    <a class="dropdown-item" href="/profile" style={{ color: "#c49d48e3", fontSize: "18px" }}>MY PROFILE</a>
                   <li>
-                    <button class="dropdown-item" type="button" style={{ color: "#C49D48", fontSize: "1rem" }} onClick={() => userLogout()}>LOGOUT</button>
+                    <button class="dropdown-item" type="button" style={{ color: "#C49D48", fontSize: "18px" }} onClick={() => userLogout()}>LOGOUT</button>
                   </li>
                 </li>
 
@@ -81,7 +81,7 @@ function NavBarUser() {
           </li>
 
           <li class="nav-item active">
-            <a class="nav-link" href="#" style={{ borderColor: "#C49D48", color: "#C49D48", fontSize: "1.3rem" }}>MY TRIPS</a>
+            <a class="nav-link" href="#" style={{ borderColor: "#C49D48", color: "#C49D48", fontSize: "18px" }}>MY TRIPS</a>
           </li>
 
           <li>

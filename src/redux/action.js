@@ -25,6 +25,7 @@ export const GET_LS_USER = "GET_LS_USER";
 export const REGISTER_USER = "REGISTER_USER";
 export const GOOGLE_LOGIN = "GOOGLE_LOGIN";
 export const BUY_IN_MERCADOPAGO = "BUY_IN_MERCADOPAGO";
+export const VERIFY_USER = "VERIFY_USER";
 
 // Esta ruta envía una compra a la pasarela de mercadopago
 export function buyInMercadoPago(itemsFromStore) {
@@ -38,6 +39,20 @@ export function buyInMercadoPago(itemsFromStore) {
       payload: response.data,
     });
   };
+}
+
+//Esta ruta verifica el usuario despues de si registro
+export function verifyUser(id, token){
+  return async function () {
+    fetch(`https://viveargentina.herokuapp.com/users/verify/${id}`, {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+      }
+  })
+  }
 }
 
 // Esta ruta añade un paquete a favoritos del usuario

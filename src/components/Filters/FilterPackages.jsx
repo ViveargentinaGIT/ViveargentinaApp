@@ -15,13 +15,8 @@ export default function FilterPackages({ handleOrder }) {
 
     useEffect(() => {
         dispatch(getAllCities())
-        dispatch(getAllPackages())
     }, [dispatch]);
 
-
-useEffect(() => {
-    dispatch(getAllCities())
-}, [dispatch]);
 
 
     function handleFilterByCity(e) {

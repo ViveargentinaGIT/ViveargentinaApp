@@ -6,12 +6,11 @@ import { Link } from 'react-router-dom'
 
 import { useDispatch } from "react-redux";
 import NavBar from '../NavBar/NavBar.jsx';
-import Carousel from '../Carousel/Carousel.Home'
-import './HomePage.css'
-// import MenuGuest from '../User/MenuGuest.jsx';
+import Carousel from '../Carousel/Carousel.Home';
+import './HomePage.css';
 import NavBarUser from '../NavBarUser/NavBarUser.jsx';
 import { useSelector } from 'react-redux';
-import { getLsUser } from "./../../redux/action.js"
+import { getLsUser } from "./../../redux/action.js";
 import Footer from '../Footer/Footer.jsx';
 
 

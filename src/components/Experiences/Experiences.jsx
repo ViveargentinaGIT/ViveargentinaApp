@@ -34,6 +34,8 @@ export default function Experiences(props) {
     lastExperiencePage
   );
 
+
+
   const paged = function (pageNumber) {
     if (pageNumber !== page) {
       window.scrollTo({
@@ -54,39 +56,82 @@ export default function Experiences(props) {
     image: "",
   });
 
-  const handleChange = async (e, name, price, image) => {
-    console.log("Entrando a HC");
+  const handleChange = (e) => {
     setItem({
       ...item,
       [e.target.name]: e.target.value,
-      name: name,
-      image: image,
-      price: price,
     });
   };
 
-  const handleClick = (event) => {
+  const handleClickPreCart = (name, price, image) => {
+    setItem({
+      ...item,
+      name: name,
+      image: image,
+      price: price,
+    })
+  }
+
+  const handleClick = () => {
+    if (document.getElementById(`${item.name} passengers`).value <= 0) {
+      return Swal.fire({
+        title: "You must add at least one passenger",
+        text: item.name,
+        imageUrl: item.image,
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+      });
+    }
+    if (document.getElementById(`${item.name} dates`).value === 'select') {
+      return Swal.fire({
+        title: "You must select a date to continue",
+        text: item.name,
+        imageUrl: item.image,
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+      });
+    }
+
     let arrayItemsStore = JSON.parse(localStorage.getItem("items"));
     if (arrayItemsStore === null) arrayItemsStore = [];
+    if (arrayItemsStore.find(e => e.name === item.name && e.dates === item.dates)) {
+      document.getElementById(`${item.name} dates`).value = 'select'
+      return Swal.fire({
+        title: "You already have this item in your cart",
+        text: item.name,
+        imageUrl: item.image,
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+      });
+      
+    }
+    if (!arrayItemsStore.find(e => e.name === item.name && e.dates === item.dates)) {
+      console.log(document.getElementById(`${item.name} dates`).value)
     arrayItemsStore.push(item);
     localStorage.setItem("items", JSON.stringify(arrayItemsStore));
     // Alert
-    Swal.fire({
-      title: "ADDED TO CART SUCCESSFULLY!",
+
+    document.getElementById(`${item.name} dates`).value = 'select'
+    setItem({
+      name: "",
+      price: 0,
+      pax: 1,
+      dates: "",
+      image: "",
+    });
+    return Swal.fire({
+      title: "Added to cart successfully!",
       text: item.name,
       imageUrl: item.image,
       imageWidth: 400,
       imageHeight: 200,
       imageAlt: "Custom image",
     });
-    setItem({
-      name: "",
-      price: 0,
-      pax: 0,
-      dates: "",
-      image: "",
-    });
-  };
+  }
+};
 
   //   Fin Precart
 
@@ -97,6 +142,7 @@ export default function Experiences(props) {
   }
 
   useEffect(() => {
+    window.scrollTo({top: 0, behavior: 'smooth'})
     dispatch(getLsUser())
     if (packageId) {
       dispatch(getPackageById(packageId));
@@ -136,14 +182,16 @@ export default function Experiences(props) {
                         textTransform: "uppercase",
                         fontWeight: "600",
                         color: "#C49D48",
-                        fontSize: "1.1vw"
+                        fontSize: "24px"
                       }}
                     >
                       {e.name[0].toUpperCase() + e.name.slice(1)}
                     </h2>
-                    <h4 style={{ fontSize: "0.8vw", textTransform: "uppercase", fontWeight: "700", fontFamily: "Roboto"}}>{e.subTitle}</h4>
+                    <h4 style={{ fontSize: "18px", textTransform: "uppercase", fontWeight: "500", fontFamily: "Roboto"}}>{e.subTitle}</h4>
+                    <h4 style={{ color:"#C49D48",fontWeight: "700", fontFamily: "Roboto",fontSize: "18px" }}>
                     Score:{e.score}
-                    <p style={{ fontFamily: "Roboto", fontSize: "1.2vw", fontWeight: "300", textAlign:"justify", marginRight:"5vh" }}>{e.description}</p>
+                      </h4>
+                    <p style={{ fontFamily: "Roboto", fontSize: "20px", fontWeight: "300", textAlign:"justify", marginRight:"5vh" }}>{e.description}</p>
                     <div className={styles.priceandcart}>
                       <ul className={styles.iconsexperience}>
                         <li style={{ color: "black", textTransform: "uppercase", fontFamily: "Roboto" }}>
@@ -166,6 +214,7 @@ export default function Experiences(props) {
                         {/* Boton Modal */}
                         <button
                           type="button"
+                          onClick={() => handleClickPreCart(e.name, e.price, e.image)}
                           className="btn btn-outline-secondary btn-lg"
                           data-bs-toggle="modal"
                           data-bs-target={`#${e.name
@@ -209,14 +258,14 @@ export default function Experiences(props) {
                                   style={{
                                     color: "#C49D48",
                                     textTransform: "uppercase",
-                                    fontSize: "1.2vw"
+                                    fontSize: "20px"
                                   }}
                                 >
                                   {e.name}
                                 </h2>
-                                <h4 style={{ fontSize: "0.8vw",textTransform: "uppercase", fontWeight: "700" }}>{e.subTitle}</h4>
+                                <h4 style={{ fontSize: "16px",textTransform: "uppercase", fontWeight: "600" }}>{e.subTitle}</h4>
                               </div>
-                              <p  style={{ fontFamily: "Roboto", fontSize: "1.1vw", fontWeight: "300", textAlign:"justify" }}className={styles.modaldescription}>
+                              <p  style={{ fontFamily: "Roboto", fontSize: "16px", fontWeight: "300", textAlign:"justify" }}className={styles.modaldescription}>
                                 {e.description}
                               </p>
                               <div class="mt-5 mb-5">
@@ -239,32 +288,26 @@ export default function Experiences(props) {
                               <div class="mt-5 mb-5">
                                 <div className="row ">
                                   <div className="col-md-8">
+
                                     <p style={{
                                         color: "black",
                                         fontWeight: "200",
                                         fontFamily: "Roboto",
                                       }} className="text-end">
-                                      Please, choose the number of passengers:
+                                      Please, select the number of passengers:
+
                                     </p>
                                   </div>
                                   <div className="col-md-4 text-start">
                                     <input
                                       className={styles.cantpackages}
                                       name="pax"
-                                      min="0"
-                                      id="pax"
+                                      min="1"
+                                      id={`${item.name} passengers`}
                                       type="number"
                                       value={item.pax}
-                                      defaultValue="0"
-                                      onChange={(event) =>
-                                        handleChange(
-                                          event,
-                                          e.name,
-                                          e.price,
-                                          e.image,
-                                          e.dates
-                                        )
-                                      }
+                                      defaultValue="1"
+                                      onChange={(event) => handleChange(event)}
                                       style={{
                                         color: "black",
                                         fontWeight: "500",
@@ -275,37 +318,30 @@ export default function Experiences(props) {
                                 </div>
                                 <div className="row ">
                                   <div className="col-md-8">
+
                                     <p  style={{
                                         color: "black",
                                         fontWeight: "200",
                                         fontFamily: "Roboto",
                                       }} className="text-end">
-                                      Please, choose date:
+                                      Please, select date:
                                     </p>
                                   </div>
                                   <div className="col-md-4 text-start">
                                     <select
-                                      onChange={(event) =>
-                                        handleChange(
-                                          event,
-                                          e.name,
-                                          e.price,
-                                          e.image,
-                                          e.dates
-                                        )
-                                      }
+                                      onChange={(event) => handleChange(event)}
                                       name="dates"
-                                      id="dates"
+                                      id={`${e.name} dates`}
                                       style={{
                                         color: "black",
                                         fontWeight: "500",
                                         fontFamily: "Roboto",
                                       }}
                                     >
-                                      <option disabled selected>
-                                        Choose
+                                      <option value="select" disabled selected>
+                                        Select
                                       </option>
-                                      {e.dates.split(",").map((e) => {
+                                      {e.dates?.split(",").map((e) => {
                                         return <option value={e}>{e} </option>;
                                       })}
                                     </select>
@@ -319,11 +355,12 @@ export default function Experiences(props) {
                                         color: "black",
                                         fontWeight: "800",
                                         fontFamily: "Roboto",
+                                        fontSize:"18px"
                                       }}
-                                    >
+                                    > 
                                       TOTAL:{" "}
                                       <i className="bi bi-currency-dollar"></i>
-                                      ARS {e.price * item.pax}
+                                      ARS {e.price * item.pax < 0 ? 0 : e.price * item.pax}
                                     </div>
                                   </div>
                                 </div>

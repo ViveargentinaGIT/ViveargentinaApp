@@ -45,7 +45,7 @@ export default function Register() {
 
                     {/* Inicio boton para abrir el modal */}
                     <div>
-                        <button type="button" className="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" style = {{textTransform:"uppercase", fontFamily: "Raleway", borderColor:"#C49D48",color:" #C49D48",}}>
+                        <button type="button" className="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" style = {{textTransform:"uppercase", fontFamily: "Raleway", borderColor:"#C49D48",color:" #C49D48",fontSize: "18px" }}>
                             Register <i class="bi bi-person-lines-fill"></i>
                         </button>
                     </div>
@@ -57,7 +57,7 @@ export default function Register() {
                             <div className="modal-content">
 
                                 <div className="modal-header">
-                                    <h5 className="modal-title" id="exampleModalLabel">PLEASE REGISTER</h5>
+                                    <h5 style={{fontSize: "20px"}}className="modal-title" id="exampleModalLabel">PLEASE REGISTER</h5>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
 
@@ -71,7 +71,7 @@ export default function Register() {
 
                                             <Form.Group as={Col} md="6" controlId="validationCustom01">
 
-                                                <Form.Label>Name</Form.Label>
+                                                <Form.Label>NAME</Form.Label>
                                                 <Form.Control required type="text" name="first_name" value={newUser.first_name} onChange={(e)=>handleChange(e)} placeholder="John" />
 
                                                 <Form.Control.Feedback>
@@ -82,7 +82,7 @@ export default function Register() {
                                             
                                             <Form.Group as={Col} md="6" controlId="validationCustom02">
 
-                                                <Form.Label>Lastname</Form.Label>
+                                                <Form.Label>LASTNAME</Form.Label>
                                                 <Form.Control required type="text" name="last_name" value={newUser.last_name} onChange={(e)=>handleChange(e)} placeholder="Wick" />
 
                                                 <Form.Control.Feedback>
@@ -97,7 +97,7 @@ export default function Register() {
 
                                             <Form.Group as={Col} md="12" controlId="validationCustom02">
 
-                                                <Form.Label><i class="bi bi-envelope-fill"></i> Email</Form.Label>
+                                                <Form.Label><i class="bi bi-envelope-fill"></i> EMAIL</Form.Label>
                                                 <Form.Control required type="email" name="email" value={newUser.email} onChange={(e)=>handleChange(e)} placeholder="name@example.com" />
 
                                                 <Form.Control.Feedback type="invalid">
@@ -133,7 +133,7 @@ export default function Register() {
 
                                             <Form.Group as={Col} md="12" controlId="formGroupPassword">
 
-                                                <Form.Label htmlFor="inputPassword5"><i class="bi bi-key-fill"></i> Password</Form.Label>
+                                                <Form.Label htmlFor="inputPassword5"><i class="bi bi-key-fill"></i> PASSWORD</Form.Label>
 
                                                 <Form.Control required type="password" name="password" value={newUser.password} onChange={(e)=>handleChange(e)} id="inputPassword5" aria-describedby="passwordHelpBlock" />
                                                 <Form.Text id="passwordHelpBlock" muted>
@@ -151,7 +151,7 @@ export default function Register() {
 
                                             <Form.Group as={Col} md="12" controlId="formGroupPassword">
 
-                                                <Form.Label htmlFor="inputPassword5"><i class="bi bi-key-fill"></i>Repeat Password</Form.Label>
+                                                <Form.Label htmlFor="inputPassword5"><i class="bi bi-key-fill"></i>REPEAT PASSWORD</Form.Label>
 
                                                 <Form.Control required type="password" name="repeatPassword" value={newUser.repeatPassword} onChange={(e)=>handleChange(e)} id="inputPassword5" aria-describedby="passwordHelpBlock" />
                                                 <Form.Text id="passwordHelpBlock" muted>
@@ -174,7 +174,7 @@ export default function Register() {
                                         </Form.Group>
 
                                         <Row className="mb-3">
-                                            <Button type="submit" onClick={(e)=>handleSubmit(e)} data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal1" style={{fontSize: "2vh", fontFamily:"Raleway", backgroundColor: "#C49D48", borderColor: "#C49D48" }}>Register</Button>
+                                            <Button type="submit" onClick={(e)=>handleSubmit(e)} data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal1" style={{fontSize: "2vh", fontFamily:"Raleway", backgroundColor: "#C49D48", borderColor: "#C49D48" }}>REGISTER</Button>
                                         </Row>
 
                                     </Form>

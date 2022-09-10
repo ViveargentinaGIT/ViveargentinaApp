@@ -43,16 +43,62 @@ export default function Cart() {
     }
   }
 
+
   function setBuyInFalse() {
     setBuy(false);
   }
-
+  
   function onClickBuy() {
     setBuy(true);
     itemsFromStore = JSON.parse(localStorage.getItem("items"));
     dispatch(buyInMercadoPago(itemsFromStore));
   }
 
+
+  if(!itemsFromStore || itemsFromStore.length === 0) {
+    return (
+    <div>
+      <button
+        class="btn btn-outline-secondary btn-lg"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasRight"
+        aria-controls="offcanvasRight"
+        style={{
+          borderColor: "#c49d48e3",
+          borderRadius: "2vh",
+        }}
+      >
+        <i class="bi bi-cart"></i>
+      </button>
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel"
+        style={{backgroundColor:"#EFD6AC"}}
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasRightLabel" >
+            <h4>
+              <i class="bi bi-cart"></i> MY CART
+            </h4>
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+          <div class="offcanvas-body">
+        You have no items in your cart yet <i class="bi bi-emoji-frown"></i>
+          </div>
+        </div>
+    </div>
+    )
+  }
+  else {
   return (
     <div>
       <button
@@ -94,6 +140,8 @@ export default function Cart() {
           {itemsFromStore?.map((item, index) => {
             totalcart = totalcart + item.price * item.pax;
             return (
+                <div style={{maxHeight:"7vh"}}>
+
               <ItemCart
                 index={index}
                 setBuyInFalse={setBuyInFalse}
@@ -103,7 +151,9 @@ export default function Cart() {
                 image={item.image}
                 dates={item.dates}
                 changeState={changeState}
-              ></ItemCart>
+                ></ItemCart>
+                
+                </div>
             );
           })}
           <div>
@@ -145,5 +195,5 @@ export default function Cart() {
         </div>
       </div>
     </div>
-  );
+    )}
 }

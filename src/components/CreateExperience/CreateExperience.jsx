@@ -75,7 +75,7 @@ export default function Experiences() {
             </div>
 
             <div
-              className="modal fade"
+              className="modal modal-lg fade"
               id="cexampleModal"
               tabIndex="-1"
               aria-labelledby="cexampleModalLabel"

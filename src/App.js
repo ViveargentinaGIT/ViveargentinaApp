@@ -15,7 +15,10 @@ import MenuGuest from "./components/User/MenuGuest";
 import Footer from "./components/Footer/Footer";
 import NavBar from "./components/NavBar/NavBar";
 import Profile from "./components/User/Profile"
-
+import MyTrips from "./components/User/MyTrips";
+import MyFavs from './components/User/MyFavs.jsx';
+import Verify from "./components/User/Verify";
+import AdminDashboard from './components/Admin/AdminDashboard.jsx';
 
 function App() {
   return (
@@ -29,12 +32,16 @@ function App() {
           <Route exact path="/city" component={City} />
           <Route exact path="/home" component={HomePage} />
           <Route path="/packages/:cityId" component={Packages} />
+          <Route path="/verify/:id" component={Verify} />
           <Route exact path="/packages" component={Packages} />
           <Route path="/experiences/:packageId" component={Experiences} />
           <Route exact path="/experiences" component={Experiences} />
           <Route path="/cart" component={Cart} />
           <Route path="/userlogged" component={MenuUser} />
           <Route path="/userguest" component={MenuGuest} />
+          <Route path="/mytrips" component={MyTrips} />
+          <Route path="/myfavs" component={MyFavs} />
+          <Route path="/admin" component={AdminDashboard} />
           <Route path="*" component={Error404} />
           
         </Switch>

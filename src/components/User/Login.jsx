@@ -89,9 +89,9 @@ export default function Login() {
                         className="btn btn-outline-secondary btn-lg" 
                         data-bs-toggle="modal" 
                         data-bs-target="#exampleModal1"
-                        style = {{textTransform:"uppercase", borderColor:"#C49D48", fontFamily: "Raleway", color:" #C49D48"}}
+                        style = {{textTransform:"uppercase", borderColor:"#C49D48", fontFamily: "Raleway", color:" #C49D48",fontSize: "18px" }}
                         >
-                            Login <i class="bi bi-box-arrow-in-right"></i>
+                            LOGIN <i class="bi bi-box-arrow-in-right"></i>
                         </button>
                     </div>
                     {/* Fin boton para abrir el modal */}
@@ -100,7 +100,7 @@ export default function Login() {
                         <div className="modal-dialog">
                             <div className="modal-content">
                                 <div className="modal-header">
-                                    <h5 className="modal-title w-100 font-weight-bold" id="exampleModalLabel">PLEASE LOGIN</h5>
+                                    <h5 style={{fontSize: "20px" }}className="modal-title w-100 font-weight-bold" id="exampleModalLabel">PLEASE LOGIN</h5>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
 
@@ -114,7 +114,7 @@ export default function Login() {
 
                                             <Form.Group as={Col} md="12" controlId="formGroupEmail">
 
-                                                <Form.Label><i class="bi bi-envelope-fill"></i> Email address</Form.Label>
+                                                <Form.Label><i class="bi bi-envelope-fill"></i> EMAIL ADDRESS</Form.Label>
                                                 <Form.Control required type="email" name="email" value={newUser.email} onChange={(e)=>handleChange(e)} placeholder="name@example.com" />
 
                                                 <Form.Control.Feedback type="invalid">
@@ -132,7 +132,7 @@ export default function Login() {
 
                                             <Form.Group as={Col} md="12" controlId="formGroupPassword">
 
-                                                <Form.Label htmlFor="inputPassword5"><i class="bi bi-key-fill"></i> Password</Form.Label>
+                                                <Form.Label htmlFor="inputPassword5"><i class="bi bi-key-fill"></i> PASSWORD</Form.Label>
 
                                                 <Form.Control required type="password" name="password" value={newUser.password} onChange={(e)=>handleChange(e)} id="inputPassword5" aria-describedby="passwordHelpBlock" />
                                                 <Form.Text id="passwordHelpBlock" muted>
@@ -147,13 +147,13 @@ export default function Login() {
                                         </Row>
 
                                         <Row className="mb-3 mt-3">
-                                            <Button onClick={(e)=>handleSubmit(e)} type="submit"style={{fontSize: "2vh", fontFamily:"Raleway", backgroundColor: "#C49D48", borderColor: "#C49D48" }}>Login</Button>
+                                            <Button onClick={(e)=>handleSubmit(e)} type="submit"style={{fontSize: "2vh", fontFamily:"Raleway", backgroundColor: "#C49D48", borderColor: "#C49D48" }}>LOGIN</Button>
                                         </Row>
                                         {/*Login de Google */}
                                         <div className="googleLog" style={{textAlign: "center", }}>
                                             <GoogleLogin
                                                 clientId={clientId}
-                                                buttonText="Sign in with Google"
+                                                buttonText="SIGN IN WITH GOOGLE"
                                                 onSuccess={onSuccess}
                                                 onFailure={onFailure}
                                                 cookiePolicy={'none'}

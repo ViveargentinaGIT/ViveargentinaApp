@@ -1,0 +1,20 @@
+.mytripspage {
+    min-height: 100vh;
+}
+.itemmytrips {
+    display: inline-flex;
+}
+
+.itemmyfavs {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.tripicon {
+    font-size: 2rem;
+}
+
+.favheart {
+    font-size: 2rem;
+}

@@ -25,14 +25,14 @@ export default function Card(city) {
                         <h2
                         style={{
                         textTransform: "uppercase",
-                        fontSize: "1.1vw",
+                        fontSize: "24px",
                         fontWeight: "600",
                         color: "#C49D48",}}>
                         {name}</h2>
 
-                        <h4 style={{ fontSize: "0.8vw",textTransform: "uppercase", fontWeight: "500", fontFamily: "Roboto" }}>{subtitle}</h4>
+                        <h4 style={{ fontSize: "18px",textTransform: "uppercase", fontWeight: "500", fontFamily: "Roboto" }}>{subtitle}</h4>
 
-                        <ul style={{color:"#C49D48",fontSize: "1vw",fontWeight: "400", fontFamily: "Roboto" }}className={styles.scorecity}>
+                        <ul style={{color:"#C49D48",fontSize: "18px",fontWeight: "500", fontFamily: "Roboto" }}className={styles.scorecity}>
                             Score:{score}
                             {/*                                  
                                     <li><i class="bi bi-star-fill" Style="color:#C49D48" ></i></li>
@@ -44,10 +44,10 @@ export default function Card(city) {
 
 
                         </ul>
-                        <p style={{ fontFamily: "Roboto", fontSize: "0.96vw", fontWeight: "300", textAlign:"justify" }}> {description}</p>
+                        <p style={{ fontFamily: "Roboto", fontSize: "18px", fontWeight: "300", textAlign:"justify" }}> {description}</p>
                         <Link to={'/packages/'+id}>
                             <div className={styles.citybuttons}>
-                                <button style={{ marginTop: "0vw 0vw 1vw 0vw ", fontWeight: "500" }}type="button" class="btn btn-outline-secondary btn-lg">View all {name} packages</button>
+                                <button style={{ marginTop: "0rem 0rem 1rem 0rem ", fontWeight: "500" }}type="button" class="btn btn-outline-secondary btn-lg">View all {name} packages</button>
                             </div>
                         </Link>
                     </div>
