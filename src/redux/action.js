@@ -30,7 +30,7 @@ export const BUY_IN_MERCADOPAGO = "BUY_IN_MERCADOPAGO";
 export function buyInMercadoPago(itemsFromStore) {
   return async function (dispatch) {
     let response = await axios.post(
-      "http://localhost:3001/mercadopago",
+      "https://viveargentina.herokuapp.com/mercadopago",
       itemsFromStore
     );
     return dispatch({
