@@ -128,6 +128,7 @@ export default function MyTrips({ userId }) {
                           packages={s.packages}
                           experiences={s.experiences}
                           saleId={s.id}
+                          user={"true"}
                         />
                       </div>
                       <div className="col-md-2 text-end">

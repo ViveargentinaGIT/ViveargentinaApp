@@ -1,7 +1,22 @@
 import React from "react";
 import styles from "./MyTripDetail.module.css";
+import { useDispatch } from "react-redux";
+import { updateExperience, updatePackage } from "./../../redux/action.js";
 
-export default function MyTripDetail({ packages, experiences, saleId }) {
+export default function MyTripDetail({ packages, experiences, saleId, user }) {
+  const dispatch = useDispatch();
+
+  const scoreExperience = (event, experienceId) => {
+    let newScore = { score: event.target.value };
+
+    dispatch(updateExperience(newScore, experienceId));
+  };
+
+  const scorePackage = (event, packageId) => {
+    let newScore = { score: event.target.value };
+    dispatch(updatePackage(newScore, packageId));
+  };
+
   return (
     <div>
       <button
@@ -25,10 +40,7 @@ export default function MyTripDetail({ packages, experiences, saleId }) {
       >
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasRightLabel">
-            <h4 style={{ fontSize: "30px", color: "white" }}>
-              {" "}
-              DETAIL
-            </h4>
+            <h4 style={{ fontSize: "30px", color: "white" }}> DETAIL</h4>
           </h5>
           <button
             type="button"
@@ -68,15 +80,24 @@ export default function MyTripDetail({ packages, experiences, saleId }) {
                       </li>
                     </ul> */}
 
-                    <select id="scoreOrder" className={styles.scoreselectdetailtrips}>
-                      <option value='sort' disabled selected>Select Score</option>
-                      <option value='1'>★</option>
-                      <option value='2'>★★</option>
-                      <option value='3'>★★★</option>
-                      <option value='4'>★★★★</option>
-                      <option value='5'>★★★★★</option>
-                    </select>
-
+                    {user === "true" ? (
+                      <select
+                        id="scoreOrder"
+                        onClick={(e) => {
+                          scorePackage(e, p.id);
+                        }}
+                        className={styles.scoreselectdetailtrips}
+                      >
+                        <option value="sort" disabled selected>
+                          Select Score
+                        </option>
+                        <option value="1">★</option>
+                        <option value="2">★★</option>
+                        <option value="3">★★★</option>
+                        <option value="4">★★★★</option>
+                        <option value="5">★★★★★</option>
+                      </select>
+                    ) : null}
                   </div>
                   <div className="col-md-6 text-start">
                     <h4 className={styles.pricecart}>
@@ -108,7 +129,6 @@ export default function MyTripDetail({ packages, experiences, saleId }) {
                 </div>
                 <div className={`row mb-3 mt-3 ${styles.enditemscart}`}>
                   <div className="col-md-6 text-start">
-
                     {/* <ul className={styles.buttonitemcart}>
                       <li>
                         <div className={styles.itempax}>
@@ -117,16 +137,24 @@ export default function MyTripDetail({ packages, experiences, saleId }) {
                         </div>
                       </li>
                     </ul> */}
-
-                    <select id="scoreOrder" className={styles.scoreselectdetailtrips}>
-                      <option value='sort' disabled selected>Select Score</option>
-                      <option value='1'>★</option>
-                      <option value='2'>★★</option>
-                      <option value='3'>★★★</option>
-                      <option value='4'>★★★★</option>
-                      <option value='5'>★★★★★</option>
-                    </select>
-
+                    {user === "true" ? (
+                      <select
+                        id="scoreOrder"
+                        onClick={(e) => {
+                          scoreExperience(e, p.id);
+                        }}
+                        className={styles.scoreselectdetailtrips}
+                      >
+                        <option value="sort" disabled selected>
+                          Select Score
+                        </option>
+                        <option value="1">★</option>
+                        <option value="2">★★</option>
+                        <option value="3">★★★</option>
+                        <option value="4">★★★★</option>
+                        <option value="5">★★★★★</option>
+                      </select>
+                    ) : null}
                   </div>
                   <div className="col-md-6 text-start">
                     <h4 className={styles.pricecart}>
