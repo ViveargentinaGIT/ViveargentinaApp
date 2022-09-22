@@ -39,6 +39,18 @@ export const GET_CART_BY_USER = "GET_CART_BY_USER";
 export const GET_ALL_SALES = "GET_ALL_SALES";
 export const GET_SALES_BY_USER = "GET_SALES_BY_USER";
 
+// Esta ruta manda un mail para solicitar una cancelacion de compra.
+export function sendRequestCancelation(saleId, userId) {
+  console.log(userId);
+  console.log(saleId);
+  return async function () {
+    let response = await axios.get(
+      `https://viveargentina.herokuapp.com/sales/cancel?userId=${userId}&saleId=${saleId}`
+    );
+    return console.log(response);
+  };
+}
+
 // Esta ruta trae un array con todas las compras de un usuario.
 export function getSalesByUser(userId) {
   console.log(userId);
