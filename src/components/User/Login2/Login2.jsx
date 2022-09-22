@@ -89,6 +89,8 @@ export default function Login2() {
       imageHeight: 300,
       confirmButtonColor: "#C49D48",
       imageAlt: "Custom image",
+    }).then(() => {
+      history.go(0);
     });
   };
 
@@ -192,6 +194,8 @@ export default function Login2() {
         imageHeight: 300,
         confirmButtonColor: "#C49D48",
         imageAlt: "Custom image",
+      }).then(() => {
+        history.go(0);
       });
     }
   };
