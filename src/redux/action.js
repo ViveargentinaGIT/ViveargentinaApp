@@ -45,7 +45,7 @@ export function sendRequestCancelation(saleId, userId) {
   console.log(saleId);
   return async function () {
     let response = await axios.get(
-      `viveargentinaback-production.up.railway.app/sales/cancel?userId=${userId}&saleId=${saleId}`
+      `https://viveargentina.herokuapp.com/sales/cancel?userId=${userId}&saleId=${saleId}`
     );
     return console.log(response);
   };
@@ -56,7 +56,7 @@ export function getSalesByUser(userId) {
   console.log(userId);
   return async function (dispatch) {
     let salesByUser = await axios.get(
-      `viveargentinaback-production.up.railway.app/sales/${userId}`
+      `https://viveargentina.herokuapp.com/sales/${userId}`
     );
     return dispatch({
       type: GET_SALES_BY_USER,
@@ -69,7 +69,7 @@ export function getSalesByUser(userId) {
 export function updateSaleStatus(newStatus) {
   return async function () {
     let response = await axios.put(
-      "viveargentinaback-production.up.railway.app/sales",
+      "https://viveargentina.herokuapp.com/sales",
       newStatus
     );
     console.log(response);
@@ -87,7 +87,7 @@ export function approveSaleStatus(token, newStatus) {
       Authorization: `Bearer ${token}`,
     };
     let response = await axios.put(
-      "viveargentinaback-production.up.railway.app/sales/approved",
+      "https://viveargentina.herokuapp.com/sales/approved",
       newStatus,
       { headers }
     );
@@ -99,9 +99,7 @@ export function approveSaleStatus(token, newStatus) {
 // Esta ruta trae un array con todas las ventas.
 export function getAllSales() {
   return async function (dispatch) {
-    let allSales = await axios.get(
-      `viveargentinaback-production.up.railway.app/sales`
-    );
+    let allSales = await axios.get(`https://viveargentina.herokuapp.com/sales`);
     return dispatch({
       type: GET_ALL_SALES,
       payload: allSales.data,
@@ -115,7 +113,7 @@ export function addNewSale(userId, arrayItems) {
   return async function () {
     try {
       let response = await axios.post(
-        `viveargentinaback-production.up.railway.app/sales?userId=${userId}`,
+        `https://viveargentina.herokuapp.com/sales?userId=${userId}`,
         arrayItems
       );
       return response.data;
@@ -130,7 +128,7 @@ export function addNewCart(userId, arrayItems) {
   return async function () {
     try {
       let response = await axios.post(
-        `viveargentinaback-production.up.railway.app/cart?userId=${userId}`,
+        `https://viveargentina.herokuapp.com/cart?userId=${userId}`,
         arrayItems
       );
       return console.log(response.data);
@@ -144,7 +142,7 @@ export function addNewCart(userId, arrayItems) {
 export function getCartByUser(userId) {
   return async function (dispatch) {
     let cartByUser = await axios.get(
-      `viveargentinaback-production.up.railway.app/cart/${userId}`
+      `https://viveargentina.herokuapp.com/cart/${userId}`
     );
     return dispatch({
       type: GET_CART_BY_USER,
@@ -156,7 +154,7 @@ export function getCartByUser(userId) {
 export function deleteReview(reviewId) {
   return async function () {
     let response = await axios.delete(
-      `viveargentinaback-production.up.railway.app/reviews/${reviewId}`
+      `https://viveargentina.herokuapp.com/reviews/${reviewId}`
     );
     //console.log('response action deleteReview', response.data);
   };
@@ -173,9 +171,7 @@ export function filterSalesStatus(payload) {
 // Esta ruta trae un array con todo los usuarios.
 export function getAllUsers() {
   return async function (dispatch) {
-    let allUsers = await axios.get(
-      `viveargentinaback-production.up.railway.app/users`
-    );
+    let allUsers = await axios.get(`https://viveargentina.herokuapp.com/users`);
     return dispatch({
       type: GET_ALL_USERS,
       payload: allUsers.data,
@@ -188,7 +184,7 @@ export function getAllUsers() {
 export function getAllReviews() {
   return async function (dispatch) {
     let allReviews = await axios.get(
-      `viveargentinaback-production.up.railway.app/reviews`
+      `https://viveargentina.herokuapp.com/reviews`
     );
     return dispatch({
       type: GET_ALL_REVIEWS,
@@ -201,7 +197,7 @@ export function getAllReviews() {
 export function getUserById(userId) {
   return async function (dispatch) {
     let userById = await axios.get(
-      `viveargentinaback-production.up.railway.app/users/${userId}`
+      `https://viveargentina.herokuapp.com/users/${userId}`
     );
     return dispatch({
       type: GET_USER_BY_ID,
@@ -214,7 +210,7 @@ export function getUserById(userId) {
 export function buyInMercadoPago(saleId, itemsFromStore) {
   return async function (dispatch) {
     let response = await axios.post(
-      `viveargentinaback-production.up.railway.app/mercadopago?saleId=${saleId}`,
+      `https://viveargentina.herokuapp.com/mercadopago?saleId=${saleId}`,
       itemsFromStore
     );
     return dispatch({
@@ -228,7 +224,7 @@ export function buyInMercadoPago(saleId, itemsFromStore) {
 export function createNewReview(newReview) {
   return async function (dispatch) {
     let response = await axios.post(
-      "viveargentinaback-production.up.railway.app/reviews",
+      "https://viveargentina.herokuapp.com/reviews",
       newReview
     );
     console.log(response.data);
@@ -242,7 +238,7 @@ export function createNewReview(newReview) {
 //Esta ruta verifica el usuario despues de si registro
 export function verifyUser(token) {
   return async function () {
-    fetch(`viveargentinaback-production.up.railway.app/users/verify/`, {
+    fetch(`https://viveargentina.herokuapp.com/users/verify/`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -262,7 +258,7 @@ export function passwordReset({ token, password }) {
       Authorization: `Bearer ${token}`,
     };
     const response = await axios.post(
-      "viveargentinaback-production.up.railway.app/users/password_reset/",
+      "https://viveargentina.herokuapp.com/users/password_reset/",
       { password },
       { headers }
     );
@@ -274,7 +270,7 @@ export function passwordReset({ token, password }) {
 export function resetPasswordRequest(email) {
   return async function () {
     const response = await axios.post(
-      "viveargentinaback-production.up.railway.app/users/reset_password_request",
+      "https://viveargentina.herokuapp.com/users/reset_password_request",
       { email }
     );
     return response.data;
@@ -290,7 +286,7 @@ export function changePassword({ token, password, newPassword }) {
       Authorization: `Bearer ${token}`,
     };
     const response = await axios.post(
-      "viveargentinaback-production.up.railway.app/users/change_password",
+      "https://viveargentina.herokuapp.com/users/change_password",
       { password, newPassword },
       { headers }
     );
@@ -307,7 +303,7 @@ export function softDelete({ token, userId }) {
       Authorization: `Bearer ${token}`,
     };
     const response = await axios.put(
-      "viveargentinaback-production.up.railway.app/users/soft_delete",
+      "https://viveargentina.herokuapp.com/users/soft_delete",
       { userId },
       { headers }
     );
@@ -326,7 +322,7 @@ export function shiftAdmin({ token, userId }) {
       Authorization: `Bearer ${token}`,
     };
     const response = await axios.put(
-      "viveargentinaback-production.up.railway.app/users/shift_admin_authorization",
+      "https://viveargentina.herokuapp.com/users/shift_admin_authorization",
       { userId },
       { headers }
     );
@@ -339,7 +335,7 @@ export function shiftAdmin({ token, userId }) {
 export function addPackageFavorite(packageId, userId) {
   return async function () {
     let response = await axios.post(
-      `viveargentinaback-production.up.railway.app/favorites/packages?packageId=${packageId}&userId=${userId}`
+      `https://viveargentina.herokuapp.com/favorites/packages?packageId=${packageId}&userId=${userId}`
     );
     console.log(response);
   };
@@ -349,7 +345,7 @@ export function addPackageFavorite(packageId, userId) {
 export function addExperienceFavorite(experienceId, userId) {
   return async function () {
     let response = await axios.post(
-      `viveargentinaback-production.up.railway.app/favorites/experiences?userId=${userId}&experienceId=${experienceId}`
+      `https://viveargentina.herokuapp.com/favorites/experiences?userId=${userId}&experienceId=${experienceId}`
     );
     console.log(response);
   };
@@ -359,7 +355,7 @@ export function addExperienceFavorite(experienceId, userId) {
 export function removePackageFavorite(packageId, userId) {
   return async function () {
     let response = await axios.put(
-      `viveargentinaback-production.up.railway.app/favorites/packages?userId=${userId}&packageId=${packageId}`
+      `https://viveargentina.herokuapp.com/favorites/packages?userId=${userId}&packageId=${packageId}`
     );
     console.log(response);
   };
@@ -369,7 +365,7 @@ export function removePackageFavorite(packageId, userId) {
 export function removeExperienceFavorite(experienceId, userId) {
   return async function () {
     let response = await axios.put(
-      `viveargentinaback-production.up.railway.app/favorites/experiences?userId=${userId}&experienceId=${experienceId}`
+      `https://viveargentina.herokuapp.com/favorites/experiences?userId=${userId}&experienceId=${experienceId}`
     );
     console.log(response);
   };
@@ -377,15 +373,12 @@ export function removeExperienceFavorite(experienceId, userId) {
 
 export function registerUser({ first_name, last_name, email, password }) {
   return async function () {
-    await axios.post(
-      "viveargentinaback-production.up.railway.app/users/singin",
-      {
-        email,
-        password,
-        first_name,
-        last_name,
-      }
-    );
+    await axios.post("https://viveargentina.herokuapp.com/users/singin", {
+      email,
+      password,
+      first_name,
+      last_name,
+    });
   };
 }
 
@@ -393,7 +386,7 @@ export function registerUser({ first_name, last_name, email, password }) {
 export function contactUs({ name, lastName, email, message }) {
   return async function () {
     console.log({ name, lastName, email, message });
-    await fetch(`viveargentinaback-production.up.railway.app/contactus/`, {
+    await fetch(`https://viveargentina.herokuapp.com/contactus/`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -415,7 +408,7 @@ export function contactUs({ name, lastName, email, message }) {
 export function getUserLogin({ email, password }) {
   return async function (dispatch) {
     let response = await axios.post(
-      "viveargentinaback-production.up.railway.app/users/login",
+      "https://viveargentina.herokuapp.com/users/login",
       { email, password }
     );
     if (response.data === "Please confirm your email to login") {
@@ -440,7 +433,7 @@ export function googleLogin({ first_name, last_name, email, password, photo }) {
   return async function (dispatch) {
     console.log("before dispatch");
     const response = await axios.post(
-      "viveargentinaback-production.up.railway.app/users/google_login",
+      "https://viveargentina.herokuapp.com/users/google_login",
       { email, password, first_name, last_name, photo }
     );
     console.log(response);
@@ -480,7 +473,7 @@ export function getLsUser() {
 export function getCitiesByName(cityName) {
   return async function (dispatch) {
     let citiesByName = await axios.get(
-      `viveargentinaback-production.up.railway.app/cities?name=${cityName}`
+      `https://viveargentina.herokuapp.com/cities?name=${cityName}`
     );
     return dispatch({
       type: GET_CITIES_BY_NAME,
@@ -494,7 +487,7 @@ export function getCitiesByName(cityName) {
 export function getCityById(cityId) {
   return async function (dispatch) {
     let cityById = await axios.get(
-      `viveargentinaback-production.up.railway.app/cities/${cityId}`
+      `https://viveargentina.herokuapp.com/cities/${cityId}`
     );
     return dispatch({
       type: GET_CITY_BY_ID,
@@ -507,7 +500,7 @@ export function getCityById(cityId) {
 export function getAllCities() {
   return async function (dispatch) {
     let allCities = await axios.get(
-      `viveargentinaback-production.up.railway.app/cities`
+      `https://viveargentina.herokuapp.com/cities`
     );
     return dispatch({
       type: GET_ALL_CITIES,
@@ -520,7 +513,7 @@ export function getAllCities() {
 export function getAllPackages() {
   return async function (dispatch) {
     let allPackages = await axios.get(
-      `viveargentinaback-production.up.railway.app/packages`
+      `https://viveargentina.herokuapp.com/packages`
     );
     return dispatch({
       type: GET_ALL_PACKAGES,
@@ -534,7 +527,7 @@ export function getAllPackages() {
 export function getPackagesByName(packageName) {
   return async function (dispatch) {
     let packagesByName = await axios.get(
-      `viveargentinaback-production.up.railway.app/packages?name=${packageName}`
+      `https://viveargentina.herokuapp.com/packages?name=${packageName}`
     );
     return dispatch({
       type: GET_PACKAGES_BY_NAME,
@@ -548,7 +541,7 @@ export function getPackagesByName(packageName) {
 export function getPackageById(packageId) {
   return async function (dispatch) {
     let packageById = await axios.get(
-      `viveargentinaback-production.up.railway.app/packages/${packageId}`
+      `https://viveargentina.herokuapp.com/packages/${packageId}`
     );
     return dispatch({
       type: GET_PACKAGE_BY_ID,
@@ -561,7 +554,7 @@ export function getPackageById(packageId) {
 export function getAllExperiences() {
   return async function (dispatch) {
     let allExperiences = await axios.get(
-      `viveargentinaback-production.up.railway.app/experiences`
+      `https://viveargentina.herokuapp.com/experiences`
     );
     return dispatch({
       type: GET_ALL_EXPERIENCES,
@@ -575,7 +568,7 @@ export function getAllExperiences() {
 export function getExperiencesByName(experienceName) {
   return async function (dispatch) {
     let experiencesByName = await axios.get(
-      `viveargentinaback-production.up.railway.app/experiences?name=${experienceName}`
+      `https://viveargentina.herokuapp.com/experiences?name=${experienceName}`
     );
     return dispatch({
       type: GET_EXPERIENCES_BY_NAME,
@@ -588,7 +581,7 @@ export function getExperiencesByName(experienceName) {
 export function getExperienceById(experienceId) {
   return async function (dispatch) {
     let experienceById = await axios.get(
-      `viveargentinaback-production.up.railway.app/experiences/${experienceId}`
+      `https://viveargentina.herokuapp.com/experiences/${experienceId}`
     );
     return dispatch({
       type: GET_EXPERIENCE_BY_ID,
@@ -601,7 +594,7 @@ export function getExperienceById(experienceId) {
 export function getAllCategories() {
   return async function (dispatch) {
     let allCategories = await axios.get(
-      `viveargentinaback-production.up.railway.app/categories`
+      `https://viveargentina.herokuapp.com/categories`
     );
     return dispatch({
       type: GET_ALL_CATEGORIES,
@@ -615,7 +608,7 @@ export function getAllCategories() {
 export function getCategoryById(categoryId) {
   return async function (dispatch) {
     let categoryById = await axios.get(
-      `viveargentinaback-production.up.railway.app/categories/${categoryId}`
+      `https://viveargentina.herokuapp.com/categories/${categoryId}`
     );
     return dispatch({
       type: GET_CATEGORY_BY_ID,
@@ -628,7 +621,7 @@ export function getCategoryById(categoryId) {
 export function getAllRegions() {
   return async function (dispatch) {
     let allRegions = await axios.get(
-      `viveargentinaback-production.up.railway.app/regions`
+      `https://viveargentina.herokuapp.com/regions`
     );
     return dispatch({
       type: GET_ALL_REGIONS,
@@ -642,7 +635,7 @@ export function getAllRegions() {
 export function getRegionById(regionId) {
   return async function (dispatch) {
     let regionById = await axios.get(
-      `viveargentinaback-production.up.railway.app/regions/${regionId}`
+      `https://viveargentina.herokuapp.com/regions/${regionId}`
     );
     return dispatch({
       type: GET_REGION_BY_ID,
@@ -654,7 +647,7 @@ export function getRegionById(regionId) {
 export function createNewExperience(newExperience) {
   return async function (dispatch) {
     let newExperienceCreated = await axios.post(
-      "viveargentinaback-production.up.railway.app/experiences",
+      "https://viveargentina.herokuapp.com/experiences",
       newExperience
     );
     console.log(newExperienceCreated);
@@ -666,8 +659,7 @@ export function updateExperience(newExperience, id) {
   console.log(newExperience);
   return async function (dispatch) {
     let ExperienceUpdated = await axios.put(
-      "viveargentinaback-production.up.railway.app/experiences?experienceId=" +
-        id,
+      "https://viveargentina.herokuapp.com/experiences?experienceId=" + id,
       newExperience
     );
     console.log(ExperienceUpdated);
@@ -679,7 +671,7 @@ export function createNewPackage(newPackage) {
   console.log(newPackage);
   return async function (dispatch) {
     let newPackageCreated = await axios.post(
-      "viveargentinaback-production.up.railway.app/packages",
+      "https://viveargentina.herokuapp.com/packages",
       newPackage
     );
     console.log(newPackageCreated);
@@ -691,7 +683,7 @@ export function updatePackage(newPackage, id) {
   console.log(id);
   return async function (dispatch) {
     let PackageUpdated = await axios.put(
-      "viveargentinaback-production.up.railway.app/packages?packageId=" + id,
+      "https://viveargentina.herokuapp.com/packages?packageId=" + id,
       newPackage
     );
     console.log(PackageUpdated);
@@ -726,7 +718,7 @@ export function filterExperiences(payload) {
     let filteredExperiences;
     if (payload.categoryId && payload.packageId) {
       const result = await axios.get(
-        `viveargentinaback-production.up.railway.app/categories/${payload.categoryId}`
+        `https://viveargentina.herokuapp.com/categories/${payload.categoryId}`
       );
       const result2 = result.data.experiences.filter(
         (e) => e.packageId === payload.packageId
@@ -735,19 +727,19 @@ export function filterExperiences(payload) {
       console.log("1 filteredExperiences:", filteredExperiences);
     } else if (payload.categoryId) {
       const result = await axios.get(
-        `viveargentinaback-production.up.railway.app/categories/${payload.categoryId}`
+        `https://viveargentina.herokuapp.com/categories/${payload.categoryId}`
       );
       filteredExperiences = result.data.experiences;
       console.log("2 filteredExperiences:", filteredExperiences);
     } else if (payload.packageId) {
       const result = await axios.get(
-        `viveargentinaback-production.up.railway.app/packages/${payload.packageId}`
+        `https://viveargentina.herokuapp.com/packages/${payload.packageId}`
       );
       filteredExperiences = result.data.experiences;
       console.log("3 filteredExperiences:", filteredExperiences);
     } else {
       const result = await axios.get(
-        `viveargentinaback-production.up.railway.app/experiences`
+        `https://viveargentina.herokuapp.com/experiences`
       );
       filteredExperiences = result.data;
       console.log("4 filteredExperiences:", filteredExperiences);
