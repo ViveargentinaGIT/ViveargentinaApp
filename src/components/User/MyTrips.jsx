@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSalesByUser } from "../../redux/action";
+import { getSalesByUser, sendRequestCancelation } from "../../redux/action";
 import styles from "./User.module.css";
 import MyTripDetail from "./MyTripDetail";
 import Swal from "sweetalert2";
@@ -16,7 +16,7 @@ export default function MyTrips({ userId }) {
     dispatch(getSalesByUser(userId));
   }, []);
 
-  const sendCancelation = () => {
+  const sendCancelation = (saleId, userId) => {
     return Swal.fire({
       title:
         "Are you sure do you want to cancel this purchase? We will contact you ",
@@ -31,7 +31,7 @@ export default function MyTrips({ userId }) {
       showClass: {
         popup: "animate_animated animate_flipInY",
       },
-    }).then();
+    }).then(() => dispatch(sendRequestCancelation(saleId, userId)));
   };
 
   return (
@@ -128,11 +128,14 @@ export default function MyTrips({ userId }) {
                           packages={s.packages}
                           experiences={s.experiences}
                           saleId={s.id}
+                          user={"true"}
                         />
                       </div>
                       <div className="col-md-2 text-end">
                         <button
-                          onClick={sendCancelation}
+                          onClick={() => {
+                            sendCancelation(s.id, s.user.id);
+                          }}
                           value={s.id}
                           type="button"
                           className="btn btn-outline-secondary"
